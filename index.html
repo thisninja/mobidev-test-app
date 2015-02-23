@@ -1,14 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8" name="viewport" content="initial-scale-1, maximum-scale-1, user-scalable-no" >
-	<link rel="stylesheet" href="css/ratchet.min.css">
-	<script src="bower_components/jquery/dist/jquery.min.js"></script>
-	<script src="bower_components/underscore/underscore.js"></script>
-	<script src="bower_components/backbone/backbone.js"></script>
-	<title>Test app</title>
+    <meta charset="UTF-8" name="viewport" content="initial-scale-1, maximum-scale-1, user-scalable-no">
+    <link rel="stylesheet" href="css/ratchet.min.css">
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/backbone/backbone.js"></script>
+
+    <title>Real estate app</title>
 </head>
+
 <body>
-	<script src="js/ratchet.min.js"></script>
+	<div id="container">
+	    <script type='text/template' id='estateTemplate'>
+	    		<header class="bar bar-nav">
+					<h1 class="title"><%= estates.listings.length %> of <%= estates.total_results %> matches</h1>
+				</header>
+	    		<div class="content">
+
+	    			<ul class="table-view"> 
+	                	<% _.each(estates.listings, function(estate) { %>
+	                		<li class="table-view-cell media">
+			                    <a class="navigate-right">
+			                        <img class="media-object pull-left" src="<%= estate.thumb_url %>">
+			                        <div class="media-body">
+			                            <%= estate.price_formatted %>
+			                            <p>
+			                            	<%= estate.title %>
+			                            </p>
+			                        </div>
+			                    </a>
+		                	</li>
+	            		<% }); %>
+		                
+	                </ul>
+	            </div>
+	    </script>
+    </div>
+    <script src="js/app.js"></script>
+    <script src="js/models/singleModel.js"></script>
+    <script src="js/routes/router.js"></script>
+    <script src="js/views/estatesView.js"></script>
+    <script src="js/ratchet.min.js"></script>
 </body>
+
 </html>
