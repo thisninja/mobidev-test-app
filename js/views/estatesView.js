@@ -1,10 +1,6 @@
 app.estatesView = Backbone.View.extend({
     el: $('#container'),
     template: _.template($("#estateTemplate").html()),
-    initialize: function() {
-        _.bindAll(this, 'render');
-        this.render();
-    },
     render: function() {
         var that = this;
         this.collection = new app.realEstatesList();
