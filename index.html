@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" name="viewport" content="initial-scale-1, maximum-scale-1, user-scalable-no">
-    <link rel="stylesheet" href="css/ratchet.min.css">
+    <link rel="stylesheet" href="css/ratchet.css">
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
     <script src="bower_components/backbone/backbone.js"></script>
@@ -10,15 +10,15 @@
 </head>
 <body>
 	<div id="container">
-	    <script type='text/template' id='estateTemplate'>
+	    <script type='text/template' id='estatesTemplate'>
 	    		<header class="bar bar-nav">
 					<h1 class="title"><%= estates.listings.length %> of <%= estates.total_results %> matches</h1>
 				</header>
 	    		<div class="content">
 	    			<ul class="table-view"> 
-	                	<% _.each(estates.listings, function(estate) { %>
-	                		<li class="table-view-cell media">
-			                    <a class="navigate-right">
+	                	<% _.each(estates.listings, function(estate, i) { %>
+	                		<li class="table-view-cell media estate-item">
+			                    <a class="navigate-right" href="#estates/<%= i %>">
 			                        <img class="media-object pull-left" src="<%= estate.thumb_url %>">
 			                        <div class="media-body">
 			                            <%= estate.price_formatted %>
@@ -33,11 +33,30 @@
 	                </ul>
 	            </div>
 	    </script>
+        <script type='text/template' id='estateTemplate'>
+            <header class="bar bar-nav">
+                <a class="icon icon-left-nav pull-left btn-back"></a>
+                <h1 class="title">Property details</h1>
+            </header>
+            <div class="content">
+                <div class="content-padded">
+                    <h3> <%= estate.price_formatted %> </h3>
+                    <h3> <%= estate.title %> </h3>
+                        <img class="centered" src="<%= estate.img_url %>" alt="<%= estate.title %>" />
+                        <p>
+                            <%= estate.bedroom_number %> <%= (estate.bedroom_number) > 1 ? 'beds': 'bed' %>, <%= (estate.bathroom_number) === '' ? 0 : estate.bathroom_number %> <%= (estate.bathroom_number) > 1 ? 'bathrooms': 'bathroom' %>
+                        </p>
+                        <p>
+                            <%= estate.summary %>
+                        </p>
+                </div>
+            </div>
+        </script>
     </div>
     <script src="js/app.js"></script>
     <script src="js/routes/router.js"></script>
     <script src="js/models/singleModel.js"></script>
+    <script src="js/views/singleEstateView.js"></script>
     <script src="js/views/estatesView.js"></script>
-    <script src="js/ratchet.min.js"></script>
 </body>
 </html>

@@ -256,7 +256,10 @@ a {
 a:active {
   color: #3071a9;
 }
-
+.centered {
+  display: block;
+  margin: 0 auto;
+}
 .content {
   position: absolute;
   top: 0;
